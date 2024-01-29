@@ -24,4 +24,4 @@ production:
   url: <%= ENV['DATABASE_URL'] %>
 
 #furima-40245
-#furima_40245
+#furima_40245 
