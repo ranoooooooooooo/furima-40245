@@ -16,6 +16,7 @@
 | birthday                  | date       | null: false                    |
 
 - has_many :items
+- has_one :order
 
 
 ## items テーブル
@@ -41,14 +42,22 @@
 
 | Column                    | Type       | Options                        |
 | ------------------------- | ---------- | ------------------------------ |
-| credit_card_number        | string     | null: false                    |
-| credit_card_expiry        | date       | null: false                    |
-| credit_card_security_code | string     | null: false                    |
+| user                      | references | null: false, foreign_key: true |
+
+- belongs_to :user
+- has_one :address
+  
+
+## addresses テーブル
+
+| Column                    | Type       | Options                        |
+| ------------------------- | ---------- | ------------------------------ |
 | postcode                  | string     | null: false                    |
 | prefecture                | integer    | null: false                    |
 | city                      | string     | null: false                    |
 | street                    | string     | null: false                    |
 | building                  | string     | null: false                    |
 | phone_number              | string     | null: false                    |
+| order                     | references | null: false, foreign_key: true |
 
-- has_many :items
+- belongs_to :order
