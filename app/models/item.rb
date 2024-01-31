@@ -7,4 +7,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
+  has_one :item_category_id, :item_status_id,
+          :delivery_fee_bearer_id, :prefecture_id, :days_to_ship_id
+
+  validates :item_category_id, :item_status_id,:delivery_fee_bearer_id,
+            :prefecture_id, :days_to_ship_id,
+            numericality: { other_than: 1 , message: "can't be blank"} 
+
 end
