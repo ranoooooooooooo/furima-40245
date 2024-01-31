@@ -13,8 +13,11 @@ class Item < ApplicationRecord
             format: { with: /\A[0-9]+\z/, message: "価格は半角数字で設定してください" }
 
   extend ActiveHash::Associations::ActiveRecordExtensions
-  has_one :item_category_id, :item_status_id,
-          :delivery_fee_bearer_id, :prefecture_id, :days_to_ship_id
+  belongs_to :item_category
+  belongs_to :item_status
+  belongs_to :delivery_fee_bearer
+  belongs_to :prefecture
+  belongs_to :days_to_ship
 
   validates :item_category_id, :item_status_id,:delivery_fee_bearer_id,
             :prefecture_id, :days_to_ship_id,
