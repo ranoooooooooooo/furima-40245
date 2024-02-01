@@ -3,7 +3,7 @@ class Item < ApplicationRecord
             :delivery_fee_bearer_id, :prefecture_id, :days_to_ship_id, :price,
             :image, presence: true
   belongs_to :user
-  # has_one :order
+  has_one :order
   has_one_attached :image
 
   validates :price,
