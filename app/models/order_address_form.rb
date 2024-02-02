@@ -8,7 +8,7 @@ class OrderAddressForm
     validates :prefecture_id, numericality: { other_than: 1, message: "都道府県を選択してください" }
     validates :city
     validates :street
-    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: '半角数字で10桁以上11桁以内で入力してください'}
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: "半角数字で10桁以上11桁以内で入力してください"}
     validates :user_id
     validates :item_id
   end
