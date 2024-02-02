@@ -6,13 +6,13 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order_form = OrderAddressForm.new(item_params)
+    #@order_form = OrderAddressForm.new(item_params)
 
     if @order_form.present?
       @order_form.save
       redirect_to root_path, notice: 'Order was successfully created.'
     else
-      render :new, status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 
