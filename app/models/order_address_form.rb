@@ -1,7 +1,7 @@
 class OrderAddressForm
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postcode, :prefecture_id, :city,
-                :street, :building, :phone_number, :order_id, :token
+  attr_accessor :user_id, :item_id, :postcode, :prefecture_id,
+                :city, :street, :building, :phone_number, :token
 
   with_options presence: true do
     validates :postcode, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "半角数字でハイフンを含めて入力してください"}
@@ -13,19 +13,8 @@ class OrderAddressForm
     validates :item_id
     validates :token
   end
-  
+
   def save
-    if valid?
-      persist!
-      true
-    else
-      false
-    end
-  end
-
-  private
-
-  def persist!
     # Order モデルへの保存
     order = Order.create!(
       user_id: user_id,

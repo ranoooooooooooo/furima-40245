@@ -69,8 +69,14 @@ RSpec.describe OrderAddressForm, type: :model do
         expect(@order_address_form.errors.full_messages).to include("Phone number 半角数字で10桁以上11桁以内で入力してください")
       end
 
-      it '電話番号が10桁以上11桁以内でなければ商品購入できない' do
+      it '電話番号が10桁以上でなければ商品購入できない' do
         @order_address_form.phone_number = "333333"
+        @order_address_form.valid?
+        expect(@order_address_form.errors.full_messages).to include("Phone number 半角数字で10桁以上11桁以内で入力してください")
+      end
+      
+      it '電話番号が11桁以内でなければ商品購入できない' do
+        @order_address_form.phone_number = "3333333333333333333"
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include("Phone number 半角数字で10桁以上11桁以内で入力してください")
       end
