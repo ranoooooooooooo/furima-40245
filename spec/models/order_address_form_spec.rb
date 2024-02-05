@@ -10,7 +10,7 @@ RSpec.describe OrderAddressForm, type: :model do
   describe '商品購入' do
 
     context '商品購入できる場合' do
-      it '必要事項を全て過不足なく入力すると商品購入できる' do
+      it '必要事項を全て過不足なく入力し、tokenがあると商品購入できる' do
         expect(@order_address_form).to be_valid
       end
 
@@ -85,6 +85,12 @@ RSpec.describe OrderAddressForm, type: :model do
         @order_address_form.item_id = nil
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include("Item can't be blank")
+      end
+
+      it "tokenが空では商品購入できない" do
+        @order_address_form.token = nil
+        @order_address_form.valid?
+        expect(@order_address_form.errors.full_messages).to include("Token can't be blank")
       end
 
     end
