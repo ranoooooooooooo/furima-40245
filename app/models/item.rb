@@ -3,9 +3,9 @@ class Item < ApplicationRecord
             :delivery_fee_bearer_id, :prefecture_id, :days_to_ship_id, :price,
             :image, presence: true
   belongs_to :user
-  # has_one :order
+  has_one :order, dependent: :destroy
   has_one_attached :image
-
+  
   validates :price,
             numericality:{ only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999,
             message: "価格は¥300以上、¥9,999,999以下で設定してください"  }
