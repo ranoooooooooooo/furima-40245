@@ -27,8 +27,14 @@ RSpec.describe OrderAddressForm, type: :model do
         expect(@order_address_form.errors.full_messages).to include("Postcode can't be blank")
       end
 
-      it '郵便番号が「3桁ハイフン4桁」の半角文字列でなければ商品購入できない' do
+      it '郵便番号が半角文字列でなければ商品購入できない' do
         @order_address_form.postcode = "３３３３３３"
+        @order_address_form.valid?
+        expect(@order_address_form.errors.full_messages).to include("Postcode 半角数字でハイフンを含めて入力してください")
+      end
+
+      it '郵便番号が「3桁ハイフン4桁」でなければ商品購入できない' do
+        @order_address_form.postcode = "3333333"
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include("Postcode 半角数字でハイフンを含めて入力してください")
       end
@@ -57,13 +63,13 @@ RSpec.describe OrderAddressForm, type: :model do
         expect(@order_address_form.errors.full_messages).to include("Phone number can't be blank")
       end
 
-      it '電話番号が10桁以上11桁以内の半角数値でなければ商品購入できない' do
+      it '電話番号が半角数値でなければ商品購入できない' do
         @order_address_form.phone_number = "３３３３３３"
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include("Phone number 半角数字で10桁以上11桁以内で入力してください")
       end
 
-      it '電話番号が10桁以上11桁以内の半角数値でなければ商品購入できない' do
+      it '電話番号が10桁以上11桁以内でなければ商品購入できない' do
         @order_address_form.phone_number = "333333"
         @order_address_form.valid?
         expect(@order_address_form.errors.full_messages).to include("Phone number 半角数字で10桁以上11桁以内で入力してください")
