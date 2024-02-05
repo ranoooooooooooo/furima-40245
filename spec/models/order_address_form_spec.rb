@@ -13,6 +13,11 @@ RSpec.describe OrderAddressForm, type: :model do
       it '必要事項を全て過不足なく入力すると商品購入できる' do
         expect(@order_address_form).to be_valid
       end
+
+      it 'buildingは空でも商品購入できる' do
+        @order_address_form.building = ''
+        expect(@order_address_form).to be_valid
+      end
     end
 
     context '商品購入できない場合' do
