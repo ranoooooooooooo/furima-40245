@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    #@order_form = OrderAddressForm.new(item_params)
     @order_form = OrderAddressForm.new(order_params)
 
     if @order_form.valid?
@@ -23,13 +22,7 @@ class OrdersController < ApplicationController
   end
 
   private
-
-  #def item_params
-    #params.require(:item).permit(:item_name, :item_description, :item_category_id, :item_status_id,
-    #:delivery_fee_bearer_id, :prefecture_id, :days_to_ship_id, :price, :image)
-    #.merge(user_id: current_user.id)
-  #end
-
+  
   def order_params
     params.require(:order_address_form).permit(:postcode, :prefecture_id, :city, :street, :building, :phone_number)
     .merge(user_id: current_user.id, item_id: params[:item_id])
